@@ -1,0 +1,47 @@
+div.picasa-preview #picasa-loader {
+	 background:#fff url(ajax-loader.gif) center center no-repeat;
+}
+
+/*
+For kubrik-based themes
+*/
+.picasa-album {
+}
+
+.picasa-album h2 {
+	font-size: 14px;
+}
+
+ul.picasa-photos {
+	/*border: 1px dotted #696969;*/
+	list-style: none;
+	list-style-type: none;
+	width: 100%;
+}
+
+ul.picasa-photos li {
+	list-style: none;
+	display: inline;
+	content: "";
+}
+
+.entry ul.picasa-photos li:before {
+content:"";
+}
+
+
+/*
+Some additional
+*/
+ul.picasa-photos li img {
+	max-width: auto;
+	float: none!important;
+}
+
+.picasa-preview {
+	clear: both;
+}
+
+.picasa-preview img {
+	float: none!important;
+}
