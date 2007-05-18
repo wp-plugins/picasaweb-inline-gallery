@@ -3,7 +3,7 @@
 * Picasa Web Albums inline integration
 *
 * by Eugene Bond <eugene.bond@gmail.com>
-* http://bondariev.info/web/picasaweb/
+* http://bondariev.info/category/web/picasaweb/
 */
 jQuery.picasaweb = {
 	_static: 1,
