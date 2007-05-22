@@ -3,7 +3,7 @@
 * Picasa Web Albums inline integration
 *
 * by Eugene Bond <eugene.bond@gmail.com>
-* http://bondariev.info/web/picasaweb/
+* http://bondariev.info/category/web/picasaweb/
 */
 jQuery.picasaweb = {
 	_static: 1,
@@ -56,14 +56,15 @@ jQuery.picasaweb = {
 		}
 		if (!a) return;
 		
-		var u = [], e = data.entry || [];
+		var u = [], e = data.entry || [], t;
 		
 		for (i=0; i<e.length; i++) {
-			
-			u.push('<li><a href="'+e[i]["media$group"]["media$thumbnail"][1]["url"]+'" rel="'+jQuery.picasaweb._getAlternate(e[i].link)+'" id="'+e[i].id["$t"]+'" title="'+e[i].title["$t"]+'"><img src="'+e[i]["media$group"]["media$thumbnail"][0]["url"]+'" border="0" width="'+e[i]["media$group"]["media$thumbnail"][0]["width"]+'" height="'+e[i]["media$group"]["media$thumbnail"][0]["height"]+'" /></a></li>');
+			t = e[i].summary["$t"] || e[i].title["$t"];
+			u.push('<li><a href="'+e[i]["media$group"]["media$thumbnail"][1]["url"]+'" rel="'+jQuery.picasaweb._getAlternate(e[i].link)+'" id="'+e[i].id["$t"]+'" title="'+t+'"><img src="'+e[i]["media$group"]["media$thumbnail"][0]["url"]+'" border="0" width="'+e[i]["media$group"]["media$thumbnail"][0]["width"]+'" height="'+e[i]["media$group"]["media$thumbnail"][0]["height"]+'" /></a></li>');
 		}
-		
-		$(a).after('<div class="picasa-album" id="picasa-album-'+a.picasaId+'"><h2><a href="'+a.href+'">'+data.title["$t"]+'</a></h2><div class="picasa-descaription">'+data.subtitle["$t"]+'</div><div class="picasa-preview"><a target="_blank" href="'+jQuery.picasaweb._getAlternate(e[0].link)+'"><img style="display: none;" src="'+e[0]["media$group"]["media$thumbnail"][1]["url"]+'" border="0" /></a><div id="picasa-loader" style="position: relative;"></div></div><ul class="picasa-photos">'+u.join("")+'</ul><div>');
+		t = e[0].summary["$t"] || e[0].title["$t"];
+			
+		$(a).after('<div class="picasa-album" id="picasa-album-'+a.picasaId+'"><h2><a href="'+a.href+'">'+data.title["$t"]+'</a></h2><div class="picasa-description">'+data.subtitle["$t"]+'</div><div class="picasa-preview"><a target="_blank" href="'+jQuery.picasaweb._getAlternate(e[0].link)+'"><img style="display: none;" src="'+e[0]["media$group"]["media$thumbnail"][1]["url"]+'" border="0" /></a><div class="picasa-photo-summary">'+t+'</div><div id="picasa-loader" style="position: relative;"></div></div><ul class="picasa-photos">'+u.join("")+'</ul><div>');
 		$(a).hide();
 		$("#picasa-album-"+a.picasaId+" .picasa-photos a").click(function(event) {
 			event.stopPropagation();
@@ -71,6 +72,7 @@ jQuery.picasaweb = {
 			$("#picasa-album-"+a.picasaId+" #picasa-loader").height($("#picasa-album-"+a.picasaId+" .picasa-preview a img").height());
 			$("#picasa-album-"+a.picasaId+" #picasa-loader").width($("#picasa-album-"+a.picasaId+" .picasa-preview a img").width());
 			$("#picasa-album-"+a.picasaId+" #picasa-loader").show();
+			$("#picasa-album-"+a.picasaId+" .picasa-photo-summary").html(this.title);
 			
 			$("#picasa-album-"+a.picasaId+" .picasa-preview a img").hide();
 			$("#picasa-album-"+a.picasaId+" .picasa-preview a").attr("href", this.rel);
