@@ -17,13 +17,13 @@ Plugin works this way: after initialization it looking for all links (by searchi
 == Installation ==
 
 1. Upload `picasaweb` directory to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
+2. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Configuration ==
 
 There is new item named "Picasaweb Configuration" in "Options" section. So you can:
 1. Disable jQuery loading. Use it only if jQuery is already loaded by some other plugin or hardcoded to design
-1. Edit selector for links processing
+2. Edit selector for links processing
 
 
 == More ==
