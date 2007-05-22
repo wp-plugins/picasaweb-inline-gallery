@@ -1,5 +1,6 @@
 === Picasaweb inline gallery ===
 Contributors: bondariev
+Donate link: http://bondariev.info/web/picasaweb/
 Tags: gallery, google, picasaweb
 Requires at least: 2.0.2
 Tested up to: 2.1
@@ -16,16 +17,15 @@ Plugin works this way: after initialization it looking for all links (by searchi
 == Installation ==
 
 1. Upload `picasaweb` directory to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
+1. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Configuration ==
 
 There is new item named "Picasaweb Configuration" in "Options" section. So you can:
 1. Disable jQuery loading. Use it only if jQuery is already loaded by some other plugin or hardcoded to design
-2. Edit selector for links processing
+1. Edit selector for links processing
 
-Looks like Wordpress 2.2 already used jQuery (not tested yet by me) so may be you need to disable jQuery loading for this version.
 
 == More ==
 
-For more detailled information about the use of this plugin visit the [plugin page](http://bondariev.info/category/web/picasaweb/)!
+For more detailled information about the use of this plugin visit the [plugin page](http://bondariev.info/web/picasaweb/)!
