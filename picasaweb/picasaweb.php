@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Picasaweb inline gallery
-Version: 1.0
+Version: 1.1
 Plugin URI: http://bondariev.info/web/picasaweb/
 Description: Small jQuery based plugin for processing external web galleries inline on page
 Author: Eugene Bond
