@@ -16,11 +16,12 @@ jQuery.picasaweb = {
 		$(rule).each( 
 			function() {
 				if (this.picasaWasHere) return;
-				var h = this.href, re = /^http:\/\/picasaweb.google.com\/(.*)$/i, m = h.match(re), ga;
+				var h = this.href, re = /^http:\/\/picasaweb.google.([a-z\.]+)\/(.*)$/i, m = h.match(re), ga;
 				if (m) {
-					ga = m[1].split('/');
+					ga = m[2].split('/');
 					this.picasaGallery = ga[0];
 					this.picasaAlbum = ga[1];
+					this.picasaDomain = m[1];
 					this.picasaId = this.picasaAlbum + "-" + jQuery.picasaweb._static++;
 					jQuery.picasaweb.cache[h] = this;
 					jQuery.picasaweb.picasaCall.apply(this);
@@ -31,7 +32,7 @@ jQuery.picasaweb = {
 	},
 	
 	picasaCall: function() {
-		var call = "http://picasaweb.google.com/data/feed/api/user/" + this.picasaGallery;
+		var call = "http://picasaweb.google."+this.picasaDomain+"/data/feed/api/user/" + this.picasaGallery;
 		if (this.picasaAlbum) call = call + "/album/" + this.picasaAlbum;
 			else return; // Return for now. Later will grab an albums also
 		call = call + "?alt=json-in-script&callback=" + (this.picasaAlbum ? "$.picasaweb.picasaAlbum" : "$.picasaweb.picasaGallery");
