@@ -1,0 +1,70 @@
+div.picasa-preview #picasa-loader {
+	 background:#fff url(ajax-loader.gif) center center no-repeat;
+}
+
+/*
+For kubrik-based themes
+*/
+
+.picasa-album { 
+border:1px dotted; 
+clear:both; 
+padding:5px; 
+}
+ 
+
+
+.picasa-album h2 {
+	margin: 5px 0px;
+	font-size: 14px;
+}
+.picasa-description {
+	font-size: 13px;
+	padding-bottom: 15px;
+}
+.picasa-photo-summary {
+	font-size: 11px;
+	font-weight: bolder;
+}
+
+ul.picasa-photos { 
+height:300px; 
+list-style-image:none; 
+list-style-position:outside; 
+list-style-type:none; 
+margin:0pt !important; 
+overflow:auto; 
+padding:0pt !important; 
+}
+
+
+ul.picasa-photos li {  
+list-style: none;  
+display: inline;  
+content: "";  
+margin: 0px 3px 3px 0px !important; 
+}
+.entry ul.picasa-photos li:before {
+content:"";
+}
+
+
+/*
+Some additional
+*/
+ul.picasa-photos li img {
+	max-width: auto;
+	float: none!important;
+}
+
+.picasa-preview {  
+clear:left;  
+float:left; 
+width:300px; 
+text-align:center; 
+}
+
+
+.picasa-preview img {
+	float: none!important;
+}

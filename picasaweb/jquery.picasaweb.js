@@ -22,7 +22,7 @@ jQuery.picasaweb = {
 					this.picasaGallery = ga[0];
 					this.picasaAlbum = ga[1];
 					this.picasaDomain = m[1];
-					this.picasaId = this.picasaAlbum + "-" + jQuery.picasaweb._static++;
+					this.picasaId = this.picasaAlbum + "_" + jQuery.picasaweb._static++;
 					jQuery.picasaweb.cache[h] = this;
 					jQuery.picasaweb.picasaCall.apply(this);
 				}
@@ -35,24 +35,28 @@ jQuery.picasaweb = {
 		var call = "http://picasaweb.google."+this.picasaDomain+"/data/feed/api/user/" + this.picasaGallery;
 		if (this.picasaAlbum) call = call + "/album/" + this.picasaAlbum;
 			else return; // Return for now. Later will grab an albums also
-		call = call + "?alt=json-in-script&callback=" + (this.picasaAlbum ? "$.picasaweb.picasaAlbum" : "$.picasaweb.picasaGallery");
-		if ($.browser.msie) {
-			this.document.write('<scrip'+'t src="'+call+'"></s'+'cript>');
-		} else {
-			$("body").append('<script src="'+call+'"></script>');
+		var a = this;
+		window['_f_'+a.picasaId] = function(data) {
+			$.picasaweb.picasaAlbum(data, a);
 		}
+		call = call + "?alt=json-in-script&callback=" + '_f_'+a.picasaId;
+		document.open();
+		document.write('<scrip'+'t src="'+call+'" charset="utf-8"></s'+'cript>');
+		document.close();
 	},
 	
 	_getAlternate: function(a) {
 		return $.grep(a, function(n,i) {return n.rel=="alternate"})[0].href;
 	},
 	
-	picasaAlbum: function(json) {
+	picasaAlbum: function(json, link) {
 		var data = json.feed, i, a;
-		
-		for (i=0; i<data.link.length; i++) {
-			if (data.link[i].rel == "alternate") {
-				a = jQuery.picasaweb.cache[data.link[i].href];
+		a = link || false;
+		if (!a) {
+			for (i=0; i<data.link.length; i++) {
+				if (data.link[i].rel == "alternate") {
+					a = jQuery.picasaweb.cache[data.link[i].href];
+				}
 			}
 		}
 		if (!a) return;

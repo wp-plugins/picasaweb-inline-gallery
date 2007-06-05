@@ -1,0 +1,37 @@
+div.picasa-preview #picasa-loader {
+/* loader image can be placed here */
+}
+
+/*
+For kubrik-based themes
+*/
+.picasa-album {
+}
+
+.picasa-album h2 {
+/* album title*/
+}
+
+ul.picasa-photos {
+	/* images list */
+}
+
+ul.picasa-photos li {
+	/* images list item */
+}
+
+
+/*
+Some additional
+*/
+ul.picasa-photos li img {
+	/* image */
+}
+
+.picasa-preview {
+	/* selected image holder */
+}
+
+.picasa-preview img {
+	/* selected image */
+}
