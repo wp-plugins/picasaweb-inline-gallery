@@ -10,7 +10,12 @@ jQuery.picasaweb = {
 	
 	cache: {},
 	
-	init: function(rule) {
+	//  72,144,288,576,640
+	options: {width_m: "288", width_s: "144"},
+	
+	init: function(rule, options) {
+		
+		if (options) jQuery.extend(jQuery.picasaweb.options, options);
 		
 		var rule = rule || "a";
 		$(rule).each( 
@@ -65,11 +70,11 @@ jQuery.picasaweb = {
 		
 		for (i=0; i<e.length; i++) {
 			t = e[i].summary["$t"] || e[i].title["$t"];
-			u.push('<li><a href="'+e[i]["media$group"]["media$thumbnail"][1]["url"]+'" rel="'+jQuery.picasaweb._getAlternate(e[i].link)+'" id="'+e[i].id["$t"]+'" title="'+t+'"><img src="'+e[i]["media$group"]["media$thumbnail"][0]["url"]+'" border="0" width="'+e[i]["media$group"]["media$thumbnail"][0]["width"]+'" height="'+e[i]["media$group"]["media$thumbnail"][0]["height"]+'" /></a></li>');
+			u.push('<li><a href="'+e[i]["media$group"]["media$content"][0]["url"]+'?imgmax='+jQuery.picasaweb.options.width_m+'" rel="'+jQuery.picasaweb._getAlternate(e[i].link)+'" id="'+e[i].id["$t"]+'" title="'+t+'"><img src="'+e[i]["media$group"]["media$content"][0]["url"]+'?imgmax='+jQuery.picasaweb.options.width_s+'" border="0" /></a></li>');
 		}
 		t = e[0].summary["$t"] || e[0].title["$t"];
 			
-		$(a).after('<div class="picasa-album" id="picasa-album-'+a.picasaId+'"><h2><a href="'+a.href+'">'+data.title["$t"]+'</a></h2><div class="picasa-description">'+data.subtitle["$t"]+'</div><div class="picasa-preview"><a target="_blank" href="'+jQuery.picasaweb._getAlternate(e[0].link)+'"><img style="display: none;" src="'+e[0]["media$group"]["media$thumbnail"][1]["url"]+'" border="0" /></a><div class="picasa-photo-summary">'+t+'</div><div id="picasa-loader" style="position: relative;"></div></div><ul class="picasa-photos">'+u.join("")+'</ul><div>');
+		$(a).after('<div class="picasa-album" id="picasa-album-'+a.picasaId+'"><h2><a href="'+a.href+'">'+data.title["$t"]+'</a></h2><div class="picasa-description">'+data.subtitle["$t"]+'</div><div class="picasa-preview"><a target="_blank" href="'+jQuery.picasaweb._getAlternate(e[0].link)+'"><img style="display: none;" src="'+e[0]["media$group"]["media$content"][0]["url"]+'?imgmax='+jQuery.picasaweb.options.width_m+'" border="0" /></a><div class="picasa-photo-summary">'+t+'</div><div id="picasa-loader" style="position: relative;"></div></div><ul class="picasa-photos">'+u.join("")+'</ul><div>');
 		$(a).hide();
 		$("#picasa-album-"+a.picasaId+" .picasa-photos a").click(function(event) {
 			event.stopPropagation();

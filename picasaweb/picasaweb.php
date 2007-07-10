@@ -45,7 +45,7 @@ function picasaweb_head() {
 
 function picasaweb_footer() {
 	echo '
-	<script>$.picasaweb.init("'.get_option('picasaweb_init_rule').'");</script>';
+	<script>$.picasaweb.init("'.get_option('picasaweb_init_rule').'", {width_m: '.get_option('picasaweb_medium_size').', width_s: '.get_option('picasaweb_small_size').'});</script>';
 }
 add_action('wp_head', 'picasaweb_head');
 add_action('wp_footer', 'picasaweb_footer');
@@ -53,6 +53,8 @@ add_action('wp_footer', 'picasaweb_footer');
 add_option('picasaweb_skip_jq', '0', 'Picasaweb Plugin. Flag to skip adding jquery.js code on page', false);
 add_option('picasaweb_init_rule', 'a', 'Picasaweb Plugin. CSS-based rule to all page elements should be processed', false);
 add_option('picasaweb_css_layout', '0', 'Picasaweb Plugin. CSS-layout', false);
+add_option('picasaweb_small_size', '144', 'Picasaweb Plugin. Small thumbnail size', false);
+add_option('picasaweb_medium_size', '288', 'Picasaweb Plugin. Preview image size', false);
 
 
 
@@ -63,12 +65,18 @@ function picasaweb_config_page() {
 add_action('admin_menu', 'picasaweb_config_page');
 
 function picasaweb_conf() {
+	
+	$sizes = array(72,144,288,576,640);
+	
+	
 	if ( isset($_POST['submit']) ) {
 		if ( function_exists('current_user_can') && !current_user_can('manage_options') )
 			die(__('Cheatin&#8217; uh?'));
 	
 		update_option('picasaweb_skip_jq', (int) $_POST['picasaweb']['skip_js']);
 		update_option('picasaweb_css_layout', (int) $_POST['picasaweb']['css_layout']);
+		update_option('picasaweb_small_size', (int) $_POST['picasaweb']['small_size']);
+		update_option('picasaweb_medium_size', (int) $_POST['picasaweb']['medium_size']);
 		if ($a = trim($_POST['picasaweb']['init_rule'])) {
 			update_option('picasaweb_init_rule', $a);
 		}
@@ -93,6 +101,24 @@ foreach (_picasaweb_get_style() as $k=>$v) {
 }
 ?>
 </select> <?php _e('Layout style'); ?>
+</p>
+<p><select name="picasaweb[small_size]" id="picasaweb_small_size">
+<?php
+foreach ($sizes as $v) {
+	echo '<option value="'.$v.'"';
+	if (get_option('picasaweb_small_size')==$v) echo ' selected="yes"';
+	echo '>'.$v.'</option>';
+}
+?> <?php _e('Small thumbnail size'); ?>
+</p>
+<p><select name="picasaweb[medium_size]" id="picasaweb_medium_size">
+<?php
+foreach ($sizes as $v) {
+	echo '<option value="'.$v.'"';
+	if (get_option('picasaweb_medium_size')==$v) echo ' selected="yes"';
+	echo '>'.$v.'</option>';
+}
+?> <?php _e('Preview image size'); ?>
 </p>
 	<p class="submit"><input type="submit" name="submit" value="<?php _e('Update options &raquo;'); ?>" /></p>
 </form>
