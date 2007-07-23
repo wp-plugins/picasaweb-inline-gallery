@@ -4,7 +4,7 @@ Donate link: http://bondariev.info/web/picasaweb/
 Tags: gallery, google, picasaweb
 Requires at least: 2.0.2
 Tested up to: 2.1
-Stable tag: 1.1.3
+Stable tag: 1.1.3.1
 
 Small jQuery based plugin for processing external web galleries inline on page
 
